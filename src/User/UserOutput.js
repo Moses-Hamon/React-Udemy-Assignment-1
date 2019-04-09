@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './UserOutput.css';
 class UserOutput extends Component {
     state = {
         content: [
@@ -11,9 +12,15 @@ class UserOutput extends Component {
     }
     
     render(){
+        const style = {
+            backgroundColor: 'grey',
+            font: 'inherit',
+            textAlign: 'center'
+        }
+
         return (
-            <div>
-                <h4>User is {this.props.userName}</h4>
+            <div className='UserOutput'>
+                <h4 style={style}>User is {this.props.userName}</h4>
                 <p>
                 {this.state.content[0]}
                 </p>
