@@ -5,12 +5,24 @@ import UserOutput from './User/UserOutput';
 
 class App extends Component {
   state = {
-    user: 'Thomas'
+    users: [
+      {name: 'Thomas', age: 30},
+      {name:'Moses', age: 32},
+      {name: 'Naph', age: 28},
+      {name: 'Lauren', age:30 }
+    ]
   }
   
   changeUserHandler = (event) => {
+    
+
       this.setState({
-        user: event.target.value
+        users: [
+          {name: event.target.value, age: 30},
+          {name:'Moses', age: 32},
+          {name: 'Naph', age: 28},
+          {name: 'Lauren', age:30 }
+        ]
       });
     
     console.log(event.target.value);
@@ -20,10 +32,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <UserInput changeUser={this.changeUserHandler} userName={this.state.user}/>
-        <UserOutput userName='Moses'/>
-        <UserOutput userName={this.state.user}/>
-        <UserOutput />
+      <UserInput 
+      changeUser={this.changeUserHandler} 
+      userName={this.state.users.name}/>
+      
+      {/*Used to display all users in arr*/}
+        {this.state.users.map(user => {
+          return <UserOutput userName={user.name} />
+        })}
       </div>
     );
   }
