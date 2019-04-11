@@ -27,6 +27,7 @@ class UserOutput extends Component {
                 <p>
                 {this.state.content[1]}
                 </p>
+                <button onClick={this.props.click}>Delete User</button>
             </div>
         );
     }
