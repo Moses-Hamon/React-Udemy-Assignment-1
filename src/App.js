@@ -13,6 +13,8 @@ class App extends Component {
     ]
   }
 
+
+
   deleteUserHandler = (userIndex) => {
     const users = [...this.state.users];
     users.splice(userIndex, 1);
@@ -35,20 +37,27 @@ class App extends Component {
 
   render() {
 
+    let users = (
+      <div>
+        {/*Used to display all users in arr*/}
+          {this.state.users.map((user, index) => {
+            return <UserOutput 
+            userName={user.name}
+            click={() => this.deleteUserHandler(index)}
+            key={user.id} />
+          })}
+      </div>
+    )
+
     return (
       <div className="App">
       <UserInput 
       changeUser={this.changeUserHandler} 
       userName={this.state.users.name} />
       
+      {users} 
       
-      {/*Used to display all users in arr*/}
-        {this.state.users.map((user, index) => {
-          return <UserOutput 
-          userName={user.name}
-          click={() => this.deleteUserHandler(index)}
-          key={user.id} />
-        })}
+      
       </div>
     );
   }
