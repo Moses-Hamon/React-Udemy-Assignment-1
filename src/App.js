@@ -10,7 +10,8 @@ class App extends Component {
       {id: 'fasf', name:'Moses', age: 32},
       {id: 'fasdf', name: 'Naph', age: 28},
       {id: 'fvas', name: 'Lauren', age:30 }
-    ]
+    ],
+    inputLength: 0
   }
 
 
@@ -35,6 +36,13 @@ class App extends Component {
     // console.log('User has entered somthing to the input field');
   }
 
+  countInputLength = (event) => {
+    let length = event.target.value;
+    this.setState({
+      inputLength: length.length
+    })
+  }
+
   render() {
 
     let users = (
@@ -51,6 +59,7 @@ class App extends Component {
 
     return (
       <div className="App">
+      <UserInput inputLength={this.countInputLength} />
       <UserInput 
       changeUser={this.changeUserHandler} 
       userName={this.state.users.name} />
