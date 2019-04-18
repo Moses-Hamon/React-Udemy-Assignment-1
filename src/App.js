@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import UserInput from './User/UserInput';
 import UserOutput from './User/UserOutput';
+import ValidationComponent from './User/ValidationComponent';
 
 class App extends Component {
   state = {
@@ -39,7 +40,7 @@ class App extends Component {
   countInputLength = (event) => {
     let length = event.target.value;
     this.setState({
-      inputLength: length.length
+      inputLength: length.length 
     })
   }
 
@@ -59,7 +60,9 @@ class App extends Component {
 
     return (
       <div className="App">
-      <UserInput inputLength={this.countInputLength} />
+      <input type="text" onChange={(event) => this.countInputLength(event)} />
+      <p>Input Length: {this.state.inputLength}</p>
+      <ValidationComponent inputLength={this.state.inputLength} />
       <UserInput 
       changeUser={this.changeUserHandler} 
       userName={this.state.users.name} />
