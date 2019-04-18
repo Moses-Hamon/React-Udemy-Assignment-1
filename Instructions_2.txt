@@ -1,0 +1,2 @@
+1. Create an input Field (in App componment) with change listener which outputs the length of the entered text below it (eg in a paragraph).
+2. Create a new componment(=> ValidationComponent) which recieves the text length as a prop.
