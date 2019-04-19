@@ -3,6 +3,7 @@ import './App.css';
 import UserInput from './User/UserInput';
 import UserOutput from './User/UserOutput';
 import ValidationComponent from './User/ValidationComponent';
+import CharComponent from './CharComponent';
 
 class App extends Component {
   state = {
@@ -12,10 +13,9 @@ class App extends Component {
       {id: 'fasdf', name: 'Naph', age: 28},
       {id: 'fvas', name: 'Lauren', age:30 }
     ],
-    inputLength: 0
+    inputLength: 0,
+    singleChars: []
   }
-
-
 
   deleteUserHandler = (userIndex) => {
     const users = [...this.state.users];
@@ -44,6 +44,24 @@ class App extends Component {
     })
   }
 
+  addCharHandler = (char) => {
+    let tempArr = [];
+    console.log(char.target.value);
+    //Split the array into single chars
+    tempArr = char.target.value.split('');
+    console.log(tempArr);
+    // Add each char to the new array if tempArr is not null
+    this.setState({
+      singleChars: tempArr
+      });
+  }
+
+  inputHandler = (event) => {
+    this.countInputLength(event);
+    this.addCharHandler(event);
+  }
+
+
   render() {
 
     let users = (
@@ -58,18 +76,24 @@ class App extends Component {
       </div>
     )
 
+    let singleChars = (
+        this.state.singleChars.map((char, index) => {
+          return <CharComponent char={char} key={index}/>
+        })
+    )
+
     return (
       <div className="App">
-      <input type="text" onChange={(event) => this.countInputLength(event)} />
-      <p>Input Length: {this.state.inputLength}</p>
-      <ValidationComponent inputLength={this.state.inputLength} />
-      <UserInput 
-      changeUser={this.changeUserHandler} 
-      userName={this.state.users.name} />
-      
-      {users} 
-      
-      
+        <input type="text" onChange={(event) => this.inputHandler(event)} />
+        <p>Input Length: {this.state.inputLength}</p>
+        <ValidationComponent inputLength={this.state.inputLength} />
+        {/*Renders Characters on Screen*/}
+        {singleChars}
+
+        <UserInput 
+        changeUser={this.changeUserHandler} 
+        userName={this.state.users.name} />
+       {users} 
       </div>
     );
   }
