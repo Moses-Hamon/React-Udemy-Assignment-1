@@ -5,7 +5,7 @@ class CharComponent extends Component {
 
     render (){
         return(
-            <div className='CharComponent'>
+            <div className='CharComponent' onClick={this.props.onClick}>
                 {this.props.char}
             </div>
         );
