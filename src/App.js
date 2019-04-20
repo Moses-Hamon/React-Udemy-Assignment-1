@@ -4,6 +4,7 @@ import UserInput from './User/UserInput';
 import UserOutput from './User/UserOutput';
 import ValidationComponent from './User/ValidationComponent';
 import CharComponent from './CharComponent';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -43,7 +44,12 @@ class App extends Component {
       inputLength: length.length 
     })
   }
-
+  
+  charInputHandler = (event) => {
+    this.countInputLength(event);
+    this.addCharHandler(event);
+  }
+  
   addCharHandler = (char) => {
     let tempArr = [];
     console.log(char.target.value);
@@ -56,14 +62,27 @@ class App extends Component {
       });
   }
 
-  inputHandler = (event) => {
-    this.countInputLength(event);
-    this.addCharHandler(event);
+  charDeleteHandler = (char, index) => {
+    this.deleteChar(index);
+    
+    
   }
 
+  deleteChar = (index) => {
+    // Set Array
+    let tempArr = [...this.state.singleChars]
+    //console.log(tempArr.indexOf(char, index));
+    const t = tempArr.splice(index, 1);
+    console.log(t);
+    this.setState({
+      singleChars: tempArr,
+      inputLength: tempArr.length
+    })
+  }
+
+  
 
   render() {
-
     let users = (
       <div>
         {/*Used to display all users in arr*/}
@@ -78,13 +97,26 @@ class App extends Component {
 
     let singleChars = (
         this.state.singleChars.map((char, index) => {
-          return <CharComponent char={char} key={index}/>
+          return <CharComponent 
+          char={char} 
+          key={index}
+          onClick={() => this.charDeleteHandler(char, index)}/>
         })
     )
 
+    const buttonStyle = {
+      backgroundColor: 'lightblue',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+    }
+    }
+
     return (
       <div className="App">
-        <input type="text" onChange={(event) => this.inputHandler(event)} />
+        <input type="text" onChange={(event) => this.charInputHandler(event)} value={this.state.singleChars.join('')}  />
+        <br />
+        <button style={buttonStyle}>Look at me</button>
         <p>Input Length: {this.state.inputLength}</p>
         <ValidationComponent inputLength={this.state.inputLength} />
         {/*Renders Characters on Screen*/}
@@ -102,4 +134,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default Radium(App);
