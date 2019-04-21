@@ -1,5 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
 
 
 
@@ -11,7 +10,6 @@ const ValidationComponent = (props) => {
         width: '10%',
         textAlign: 'center',
         margin: '16px auto',
-        
     }
 
 
@@ -25,4 +23,4 @@ const ValidationComponent = (props) => {
     return <p style={style}>{msg}</p>
 }
 
-export default Radium(ValidationComponent);
+export default ValidationComponent;

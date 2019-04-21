@@ -4,7 +4,6 @@ import UserInput from './User/UserInput';
 import UserOutput from './User/UserOutput';
 import ValidationComponent from './User/ValidationComponent';
 import CharComponent from './CharComponent';
-import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -105,11 +104,7 @@ class App extends Component {
     )
 
     const buttonStyle = {
-      backgroundColor: 'lightblue',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-    }
+      backgroundColor: 'lightblue'
     }
 
     return (
@@ -134,4 +129,4 @@ class App extends Component {
 
 }
 
-export default Radium(App);
+export default App;
