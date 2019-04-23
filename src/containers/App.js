@@ -4,6 +4,7 @@ import UserInput from '../components/Users/User/UserInput';
 import Users from '../components/Users/Users';
 import ValidationComponent from '../components/Users/User/ValidationComponent';
 import CharComponent from '../components/characterComponent/CharComponent';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -113,6 +114,7 @@ class App extends Component {
 
     return (
       <div className="App">
+      <Cockpit/>
         <input type="text" onChange={(event) => this.charInputHandler(event)} value={this.state.singleChars.join('')}  />
         <br />
         <button style={buttonStyle}>Look at me</button>
