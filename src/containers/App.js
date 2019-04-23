@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import UserInput from '../components/Users/User/UserInput';
-import UserOutput from '../components/Users/User/UserOutput';
+import Users from '../components/Users/Users';
 import ValidationComponent from '../components/Users/User/ValidationComponent';
 
 class App extends Component {
@@ -48,13 +48,16 @@ class App extends Component {
 
     let users = (
       <div>
-        {/*Used to display all users in arr*/}
+        <Users 
+        users={this.state.users}
+        clicked={this.deleteUserHandler} />
+        {/*Used to display all users in arr
           {this.state.users.map((user, index) => {
             return <UserOutput 
             userName={user.name}
             click={() => this.deleteUserHandler(index)}
             key={user.id} />
-          })}
+          })} */}
       </div>
     )
 
