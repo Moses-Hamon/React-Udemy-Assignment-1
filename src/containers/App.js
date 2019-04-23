@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserInput from './User/UserInput';
-import UserOutput from './User/UserOutput';
-import ValidationComponent from './User/ValidationComponent';
+import UserInput from '../components/Users/User/UserInput';
+import UserOutput from '../components/Users/User/UserOutput';
+import ValidationComponent from '../components/Users/User/ValidationComponent';
 
 class App extends Component {
   state = {
