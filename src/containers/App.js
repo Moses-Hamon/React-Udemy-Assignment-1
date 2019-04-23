@@ -3,6 +3,7 @@ import './App.css';
 import UserInput from '../components/Users/User/UserInput';
 import Users from '../components/Users/Users';
 import ValidationComponent from '../components/Users/User/ValidationComponent';
+import CharComponent from '../components/characterComponent/CharComponent';
 
 class App extends Component {
   state = {
@@ -12,10 +13,9 @@ class App extends Component {
       {id: 'fasdf', name: 'Naph', age: 28},
       {id: 'fvas', name: 'Lauren', age:30 }
     ],
-    inputLength: 0
+    inputLength: 0,
+    singleChars: []
   }
-
-
 
   deleteUserHandler = (userIndex) => {
     const users = [...this.state.users];
@@ -43,14 +43,51 @@ class App extends Component {
       inputLength: length.length 
     })
   }
+  
+  charInputHandler = (event) => {
+    this.countInputLength(event);
+    this.addCharHandler(event);
+  }
+  
+  addCharHandler = (char) => {
+    let tempArr = [];
+    console.log(char.target.value);
+    //Split the array into single chars
+    tempArr = char.target.value.split('');
+    console.log(tempArr);
+    // Add each char to the new array if tempArr is not null
+    this.setState({
+      singleChars: tempArr
+      });
+  }
+
+  charDeleteHandler = (char, index) => {
+    this.deleteChar(index);
+    
+    
+  }
+
+  deleteChar = (index) => {
+    // Set Array
+    let tempArr = [...this.state.singleChars]
+    //console.log(tempArr.indexOf(char, index));
+    const t = tempArr.splice(index, 1);
+    console.log(t);
+    this.setState({
+      singleChars: tempArr,
+      inputLength: tempArr.length
+    })
+  }
+
+  
 
   render() {
-
     let users = (
       <div>
         <Users 
+        clicked={this.deleteUserHandler}
         users={this.state.users}
-        clicked={this.deleteUserHandler} />
+        />
         {/*Used to display all users in arr
           {this.state.users.map((user, index) => {
             return <UserOutput 
@@ -61,18 +98,33 @@ class App extends Component {
       </div>
     )
 
+    let singleChars = (
+        this.state.singleChars.map((char, index) => {
+          return <CharComponent 
+          char={char} 
+          key={index}
+          onClick={() => this.charDeleteHandler(char, index)}/>
+        })
+    )
+
+    const buttonStyle = {
+      backgroundColor: 'lightblue'
+    }
+
     return (
       <div className="App">
-      <input type="text" onChange={(event) => this.countInputLength(event)} />
-      <p>Input Length: {this.state.inputLength}</p>
-      <ValidationComponent inputLength={this.state.inputLength} />
-      <UserInput 
-      changeUser={this.changeUserHandler} 
-      userName={this.state.users.name} />
-      
-      {users} 
-      
-      
+        <input type="text" onChange={(event) => this.charInputHandler(event)} value={this.state.singleChars.join('')}  />
+        <br />
+        <button style={buttonStyle}>Look at me</button>
+        <p>Input Length: {this.state.inputLength}</p>
+        <ValidationComponent inputLength={this.state.inputLength} />
+        {/*Renders Characters on Screen*/}
+        {singleChars}
+
+        <UserInput 
+        changeUser={this.changeUserHandler} 
+        userName={this.state.users.name} />
+       {users} 
       </div>
     );
   }
