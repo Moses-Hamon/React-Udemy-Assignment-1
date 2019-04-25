@@ -64,8 +64,6 @@ class App extends Component {
 
   charDeleteHandler = (char, index) => {
     this.deleteChar(index);
-    
-    
   }
 
   deleteChar = (index) => {
@@ -80,23 +78,20 @@ class App extends Component {
     })
   }
 
-  
-
   render() {
     let users = (
-      <div>
         <Users 
         clicked={this.deleteUserHandler}
         users={this.state.users}
         />
-        {/*Used to display all users in arr
+
+        /*Used to display all users in arr
           {this.state.users.map((user, index) => {
             return <UserOutput 
             userName={user.name}
             click={() => this.deleteUserHandler(index)}
             key={user.id} />
-          })} */}
-      </div>
+          })} */
     )
 
     let singleChars = (
